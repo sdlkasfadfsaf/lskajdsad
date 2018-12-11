@@ -175,7 +175,7 @@ message.guild.createChannel(`ticket-${message.author.username}`, "text").then(ti
 
 client.on('message', message => {
 	let channel = message.client.channels;
-    if(message.content.startsWith(prefix + 'يغلق')) {
+    if(message.content.startsWith(prefix + 'close')) {
 	    message.channel.send(`لا يمكن استعمال هذا الامر الا في رومات التذاكر.`);
          if(!message.member.hasPermission("ADMINISTRATOR")) return;
         if(!message.channel.name.startsWith("ticket")) {

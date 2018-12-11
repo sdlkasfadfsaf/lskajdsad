@@ -50,7 +50,8 @@ client.on('message', message => {
 	let ticketsStation2 = message.guild.channels.find("name", "Admin TICKETS");
     
     if (command === `${prefix}new`) {
-	   if (message.guild.channels.exists("name", "ticket" + message.author.id)) return message.channel.send(`يوجد لديك تذكرة مفتوحة مسبقاً`);
+	   if (message.guild.channels("name", "ticket-" + message.author.id)) return
+	    message.channel.send(`يوجد لديك تذكرة مفتوحة مسبقاً`);
 		let embed = new Discord.RichEmbed()
         .setColor('RANDOM')
         .addField('     **=-=-:: [ share system ] ::-=-=** ' ,'╔[❖═════════════════════❖]╗')

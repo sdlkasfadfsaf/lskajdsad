@@ -176,9 +176,9 @@ message.guild.createChannel(`ticket-${message.author.username}`, "text").then(ti
 client.on('message', message => {
 	let channel = message.client.channels;
     if(message.content.startsWith(prefix + 'يغلق')) {
-        if(!message.channel.name.startsWith("ticket")) {
-            return;
-        };  
+         if (!message.channel.name.startsWith(`ticket`)) return
+	   message.channel.send(`لا يمكن استعمال هذا الامر الا في رومات التذاكر.`);
+
                 let embed = new Discord.RichEmbed()
                     .setAuthor("[Yes] or [No]  |هل انت متأكد من اغلاق هذه التذكرة ؟")
                     .setColor("RANDOM");
@@ -193,7 +193,7 @@ client.on('message', message => {
                         })
                         .then((collect) => {
                             message.channel.delete();
-							channel.delete()
+			channel.delete(ticket)
                         }) .catch(() => {
                             del.delete()
                                 .then(message.channel.send('**سوف يتم حذف الروم بعد 10 ثواني**')) .then((c) => {

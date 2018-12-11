@@ -176,31 +176,32 @@ message.guild.createChannel(`ticket-${message.author.username}`, "text").then(ti
 client.on('message', message => {
 	let channel = message.client.channels;
     if(message.content.startsWith(prefix + 'يغلق')) {
-         if (!message.channel.name.startsWith(`ticket`)) return
-	   message.channel.send(`لا يمكن استعمال هذا الامر الا في رومات التذاكر.`);
-
-                let embed = new Discord.RichEmbed()
-                    .setAuthor("[Yes] or [No]  |هل انت متأكد من اغلاق هذه التذكرة ؟")
+	    message.channel.send(`لا يمكن استعمال هذا الامر الا في رومات التذاكر.`);
+         if(!message.member.hasPermission("ADMINISTRATOR")) return;
+        if(!message.channel.name.startsWith("ticket")) {
+            return;
+        };  
+let embed = new Discord.RichEmbed()
+                    .setAuthor("Do you really want to close this ticket? Repeat the command to make sure. You have 20 seconds.")
                     .setColor("RANDOM");
-                    message.channel.sendEmbed(embed) .then(del => {
- 
-                   
-                        const filter = msg => msg.content.startsWith(prefix + 'Yes');
-                        message.channel.awaitMessages(response => response.content === prefix + 'Yes', {
+                    message.channel.sendEmbed(embed) .then(codes => {
+
+                    
+                        const filter = msg => msg.content.startsWith(prefix + 'close');
+                        message.channel.awaitMessages(response => response.content === prefix + 'close', {
                             max: 1,
                             time: 20000,
                             errors: ['time']
                         })
                         .then((collect) => {
                             message.channel.delete();
-			channel.delete(ticket)
                         }) .catch(() => {
-                            del.delete()
-                                .then(message.channel.send('**سوف يتم حذف الروم بعد 10 ثواني**')) .then((c) => {
-                                    c.delete(10000);
+                            codes.delete()
+                                .then(message.channel.send('**Operation has been cancelled.**')) .then((c) => {
+                                    c.delete(4000);
                                 })
-                                  
-                           
+                                    
+                            
                         })
  
  

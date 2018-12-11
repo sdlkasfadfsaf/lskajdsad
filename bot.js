@@ -176,13 +176,11 @@ message.guild.createChannel(`ticket-${message.author.username}`, "text").then(ti
 client.on('message', message => {
 	let channel = message.client.channels;
     if(message.content.startsWith(prefix + 'close')) {
-	    message.channel.send(`لا يمكن استعمال هذا الامر الا في رومات التذاكر.`);
-         if(!message.member.hasPermission("ADMINISTRATOR")) return;
         if(!message.channel.name.startsWith("ticket")) {
             return;
         };  
 let embed = new Discord.RichEmbed()
-                    .setAuthor("Do you really want to close this ticket? Repeat the command to make sure. You have 20 seconds.")
+                    .setAuthor("**هل انت متأكد من اغلاق التذكرة ؟ , ان كنت كذلك قم بتكرار الأمر**")
                     .setColor("RANDOM");
                     message.channel.sendEmbed(embed) .then(codes => {
 

@@ -30,7 +30,7 @@ client.on('ready', () => {
 });
 
 
-const welcome = JSON.parse(fs.readFileSync('./welcomer.json' , 'utf8'));
+const welcome = JSON.parse(fs.readFileSync('welcomer.json' , 'utf8'));
  
 client.on('message', message => {
            if (!message.channel.guild) return;
@@ -55,7 +55,7 @@ onoff: 'On',
 by: 'On',
 dm: 'Off'
 }
-fs.writeFile("./welcomer.json", JSON.stringify(welcome), (err) => {
+fs.writeFile("welcomer.json", JSON.stringify(welcome), (err) => {
 if (err) console.error(err)
 })
     }})
